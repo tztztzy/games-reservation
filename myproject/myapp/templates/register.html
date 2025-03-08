@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YNPC二手书籍交易平台 - 注册</title>
+    <link rel="stylesheet" href="{% static '/css/login.css' %}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div>
+            <h1>注册</h1>
+            <small>YNPC二手书籍交易平台</small>
+        </div>
+
+        <div>
+            {% if errormsg %}
+            <div role="alert">
+                <strong>注册失败!</strong> {{ errormsg }}
+            </div>
+            {% endif %}
+
+            <form action="/save_register/" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label class="label">用户名:
+                        <input type="text" name="username">
+                    </label>
+                </div>
+                
+                <div class="input-group">
+                    <label class="label">手机号:
+                        <input type="text" name="phone">
+                    </label>
+                </div>
+                
+                <div class="input-group">
+                    <label class="label">学号:
+                        <input type="text" name="student_number">
+                    </label>
+                </div>
+                
+                <div class="input-group">
+                    <label class="label">密码:
+                        <div class="password-container">
+                            <input type="password" name="password" id="password">
+                            <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                                <svg class="eye-icon eye-show" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" d="M0 0h24v24H0z"/>
+                                    <path d="M12 3c5.392 0 9.878 3.88 10.819 9-.94 5.12-5.427 9-10.819 9-5.392 0-9.878-3.88-10.819-9C2.121 6.88 6.608 3 12 3zm0 16c3.691 0 6.915-2.534 7.736-6C18.915 9.534 15.691 7 12 7c-3.691 0-6.915 2.534-7.736 6 .82 3.466 4.045 6 7.736 6z"/>
+                                    <path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </label>
+                </div>
+                
+                <div class="input-group">
+                    <label class="label">确认密码:
+                        <div class="password-container">
+                            <input type="password" name="repassword" id="repassword">
+                            <button type="button" class="toggle-password" onclick="togglePassword('repassword')">
+                                <svg class="eye-icon eye-show" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                    <path fill="none" d="M0 0h24v24H0z"/>
+                                    <path d="M12 3c5.392 0 9.878 3.88 10.819 9-.94 5.12-5.427 9-10.819 9-5.392 0-9.878-3.88-10.819-9C2.121 6.88 6.608 3 12 3zm0 16c3.691 0 6.915-2.534 7.736-6C18.915 9.534 15.691 7 12 7c-3.691 0-6.915 2.534-7.736 6 .82 3.466 4.045 6 7.736 6z"/>
+                                    <path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </label>
+                </div>
+                
+                <script>
+                    function togglePassword(id) {
+                        const passwordInput = document.getElementById(id);
+                        const button = passwordInput.parentElement.querySelector('.toggle-password');
+                        if (passwordInput.type === 'password') {
+                            passwordInput.type = 'text';
+                            button.parentElement.classList.add('password-visible');
+                        } else {
+                            passwordInput.type = 'password';
+                            button.parentElement.classList.remove('password-visible');
+                        }
+                    }
+                </script>
+                
+                <a href="/login">
+                    <ins>已有账号？去登录</ins>
+                </a>
+                
+                <button type="submit">注册</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
